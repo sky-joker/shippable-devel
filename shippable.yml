@@ -2,8 +2,10 @@ language: python
 
 build:
   ci:
-    - pip install ansible
-    - ls
-    - pwd
-    - cat Dockerfile
-    - docker build -t test:latest .
+    - apt install -y gcc python-dev
+    - pip install ansible docker-compose
+    - git clone https://github.com/sky-joker/awx-arm64arch.git
+    - cd awx-arm64arch/
+    - git checkout -b 4.0.0 refs/tags/4.0.0
+    - cd installer/
+    - ansible-playbook build.yml -i inventory
