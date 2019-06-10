@@ -1,0 +1,9 @@
+language: python
+
+python:
+  - 3.4
+
+build:
+  ci:
+    - pip install ansible
+    - ansible --version
