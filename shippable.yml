@@ -4,6 +4,9 @@ python:
   - 2.7
   - 3.6
 
+runtime:
+  nodePool: custom__aarch64__Ubuntu_16_04
+
 build:
   ci:
     - pip install ansible
