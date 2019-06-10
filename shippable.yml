@@ -4,3 +4,5 @@ build:
   ci:
     - pip install ansible
     - ls
+    - pwd
+    - cat Dockerfile
