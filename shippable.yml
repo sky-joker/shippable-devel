@@ -5,7 +5,7 @@ python:
   - 3.6
 
 runtime:
-  nodePool: custom__aarch64__Ubuntu_16_04
+  nodePool: shippable_shared_aarch64
 
 build:
   ci:
