@@ -6,3 +6,4 @@ build:
     - ls
     - pwd
     - cat Dockerfile
+    - docker build -t test:latest .
