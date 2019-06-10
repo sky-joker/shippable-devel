@@ -4,9 +4,6 @@ python:
   - 2.7
   - 3.6.0
 
-#runtime:
-#  nodePool: shippable_shared_aarch64
-
 build:
   ci:
     - pip install ansible
