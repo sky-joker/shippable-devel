@@ -3,4 +3,4 @@ language: python
 build:
   ci:
     - pip install ansible
-    - docker build . -t example:latest
+    - ls
