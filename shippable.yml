@@ -7,6 +7,8 @@ build:
   #pre_ci_boot:
   #  options: "-v /tmp:/tmp"
   ci:
+    - ls -al
+  post_ci:
     - apt install -y docker gcc python-dev
     - pip install ansible docker-compose
     - git clone https://github.com/sky-joker/awx-arm64arch.git
