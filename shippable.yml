@@ -5,14 +5,20 @@ runtime:
   container: true
 
 build:
-  #pre_ci_boot:
-  #  options: "-v /tmp:/tmp"
   ci:
-    - apt install -y docker gcc python-dev
-    - pip install ansible docker-compose
-    - git clone https://github.com/sky-joker/awx-arm64arch.git
-    - cp -R awx-arm64arch/ /tmp
-    - cd /tmp/awx-arm64arch/
-    - git checkout -b 4.0.0 refs/tags/4.0.0
-    - cd installer/
-    - ansible-playbook build.yml -i inventory -vvv
+    - docker run -d -it --name test -v /opt:/opt centos:7
+    - docker ps
+
+
+#build:
+#  pre_ci_boot:
+#    options: "-v /tmp:/tmp"
+#  ci:
+#    - apt install -y docker gcc python-dev
+#    - pip install ansible docker-compose
+#    - git clone https://github.com/sky-joker/awx-arm64arch.git
+#    - cp -R awx-arm64arch/ /tmp
+#    - cd /tmp/awx-arm64arch/
+#    - git checkout -b 4.0.0 refs/tags/4.0.0
+#    - cd installer/
+#    - ansible-playbook build.yml -i inventory -vvv
