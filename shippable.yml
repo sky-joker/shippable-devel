@@ -4,8 +4,8 @@ runtime:
   nodePool: shippable_shared_aarch64
 
 build:
-  pre_ci_boot:
-    options: "-v /tmp:/tmp"
+  #pre_ci_boot:
+  #  options: "-v /tmp:/tmp"
   ci:
     - apt install -y docker gcc python-dev
     - pip install ansible docker-compose
