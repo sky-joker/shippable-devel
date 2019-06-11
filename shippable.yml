@@ -8,8 +8,10 @@ build:
 #  pre_ci_boot:
 #    options: "-v /tmp:/tmp"
   ci:
-    - apt install -y docker gcc python-dev
-    - pip install ansible docker-compose sdist
+    #- apt install -y docker gcc python-dev
+    #- pip install ansible docker-compose sdist
+    - apt install -y docker gcc python-dev docker-compose
+    - pip install ansible
     - git clone https://github.com/sky-joker/awx-arm64arch.git
     - cp -R awx-arm64arch/ /tmp
     - cd /tmp/awx-arm64arch/
