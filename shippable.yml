@@ -16,6 +16,7 @@ build:
     - cd awx-arm64arch/
     - git checkout -b 4.0.0 refs/tags/4.0.0
     - cd installer/
+    - sed -i "s/..\/:\/awx:Z/\/root\/src\/github.com\/sky-joker\/shippable-devel\/awx-arm64arch:\/awx:Z/g" roles/image_build/tasks/main.yml
     - ansible-playbook build.yml -i inventory -vvv
   on_failure:
     - pwd
@@ -23,3 +24,4 @@ build:
     - ls ../
     - docker ps -a
     - docker images
+    - cat roles/image_build/tasks/main.yml
