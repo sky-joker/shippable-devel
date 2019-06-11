@@ -17,3 +17,5 @@ build:
     - git checkout -b 4.0.0 refs/tags/4.0.0
     - cd installer/
     - ansible-playbook build.yml -i inventory -vvv
+  on_failure:
+    - ls ../dist
