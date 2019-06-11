@@ -18,4 +18,7 @@ build:
     - cd installer/
     - ansible-playbook build.yml -i inventory -vvv
   on_failure:
-    - ls ../dist
+    - pwd
+    - ls
+    - ls arm64arch
+    - ls arm64arch/dist
