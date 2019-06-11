@@ -20,5 +20,6 @@ build:
   on_failure:
     - pwd
     - ls
-    - ls arm64arch
-    - ls arm64arch/dist
+    - ls ../
+    - docker ps -a
+    - docker images
