@@ -9,16 +9,12 @@ build:
     #- ls /home/shippable/cache
     #- docker pull centos:7
     #- docker run -d -it -v /home/shippable/cache:/opt --name test centos:7
-    #- docker run --privileged -v /opt:/opt --name some-docker -d docker:dind
-    - docker run --privileged -v /opt:/opt --name some-docker -d centos:7 /bin/sh
-    - echo $?
-    - docker ps
-    - docker ps -a
+    - docker run --privileged -v /opt:/opt --name some-docker -d docker:dind
     - for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i ls ; done
-    #- for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker pull centos:7' ; done
-    #- for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker run -d -v /opt:/opt --name test centos:7 ; echo $?' ; done
-    #- for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker ps' ; done
-    #- for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker ps -a' ; done
+    - for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker run -d -it -v /opt:/opt --name test centos:7 ; echo $?' ; done
+    - for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker ps' ; done
+    - for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker ps -a' ; done
+    - for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker exec -it test ls' ; done
 #  pre_ci_boot:
 #    options: "-v /tmp:/tmp"
   #ci:
