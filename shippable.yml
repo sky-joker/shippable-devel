@@ -7,14 +7,13 @@ runtime:
 build:
   ci:
     #- ls /home/shippable/cache
-    - docker pull centos:7
+    #- docker pull centos:7
     #- docker run -d -it -v /home/shippable/cache:/opt --name test centos:7
-    - docker run -d --name test centos:7
+    - docker run --privileged --name some-docker -d docker:dind
     - echo $?
     - docker ps
     - docker ps -a
-    - docker stop test && docker start test
-    - docker exec test ls
+    - docker exec dome-docker ls
 #  pre_ci_boot:
 #    options: "-v /tmp:/tmp"
   #ci:
