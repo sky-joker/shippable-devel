@@ -12,11 +12,12 @@ build:
     - docker run --privileged -v /opt:/opt --name some-docker -d docker:dind
     - docker ps
     - docker ps -a
-    - for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i ls ; done
-    - for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker run -d -it -v /opt:/opt --name test centos:7 ; echo $?' ; done
-    - for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker ps' ; done
-    - for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker ps -a' ; done
-    - for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker exec test ls' ; done
+    - for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'apk add git python-dev py-pip gcc glib musl-dev libffi-dev openssl-dev make' ; done
+    - for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'pip install ansible docker-compose' ; done
+    #- for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker run -d -it -v /opt:/opt --name test centos:7 ; echo $?' ; done
+    #- for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker ps' ; done
+    #- for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker ps -a' ; done
+    #- for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker exec test ls' ; done
 #  pre_ci_boot:
 #    options: "-v /tmp:/tmp"
   #ci:
