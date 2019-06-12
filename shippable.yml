@@ -15,7 +15,7 @@ build:
     - docker ps -a
 #  pre_ci_boot:
 #    options: "-v /tmp:/tmp"
-  ci:
+  #ci:
     #- apt install -y docker gcc python-dev
     #- pip install ansible docker-compose sdist
     #- apt install -y python-dev ansible gcc
