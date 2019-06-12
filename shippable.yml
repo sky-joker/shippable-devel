@@ -9,7 +9,7 @@ build:
     #- ls /home/shippable/cache
     #- docker pull centos:7
     #- docker run -d -it -v /home/shippable/cache:/opt --name test centos:7
-    - docker run --privileged --name some-docker -d docker:dind
+    - docker run --privileged -v /opt:/opt --name some-docker -d docker:dind
     - echo $?
     - docker ps
     - docker ps -a
