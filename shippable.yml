@@ -9,9 +9,11 @@ build:
     #- ls /home/shippable/cache
     - docker pull centos:7
     #- docker run -d -it -v /home/shippable/cache:/opt --name test centos:7
-    - docker run -d --name test --privileged centos:7
+    - docker run -d --name test centos:7
+    - echo $?
     - docker ps
     - docker ps -a
+    - docker stop test && docker start test
     - docker exec test ls
 #  pre_ci_boot:
 #    options: "-v /tmp:/tmp"
