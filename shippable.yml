@@ -13,7 +13,7 @@ build:
     - echo $?
     - docker ps
     - docker ps -a
-    - docker exec dome-docker ls
+    - for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i ls ; done
 #  pre_ci_boot:
 #    options: "-v /tmp:/tmp"
   #ci:
