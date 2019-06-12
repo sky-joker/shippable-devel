@@ -13,7 +13,9 @@ build:
     - echo $?
     - docker ps
     - docker ps -a
-    - for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i ls ; done
+    - for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker pull centos:7' ; done
+    - for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker run -d -v /opt:/opt --name test centos:7' ; done
+    - for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker exec test ls' ; done
 #  pre_ci_boot:
 #    options: "-v /tmp:/tmp"
   #ci:
