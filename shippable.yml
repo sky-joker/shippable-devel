@@ -5,26 +5,28 @@ runtime:
   container: true
 
 build:
+  ci:
+    - ls /home/shippable/cache
 #  pre_ci_boot:
 #    options: "-v /tmp:/tmp"
-  ci:
-    - apt install -y docker gcc python-dev
-    - pip install ansible docker-compose sdist
-    - apt install -y python-dev ansible
-    - pip install docker-compose
-    - git clone https://github.com/sky-joker/awx-arm64arch.git
-    - cd awx-arm64arch/
-    - git checkout -b 4.0.0 refs/tags/4.0.0
-    - cd installer/
+  #ci:
+  #  - apt install -y docker gcc python-dev
+  #  - pip install ansible docker-compose sdist
+  #  - apt install -y python-dev ansible
+  #  - pip install docker-compose
+  #  - git clone https://github.com/sky-joker/awx-arm64arch.git
+  #  - cd awx-arm64arch/
+  #  - git checkout -b 4.0.0 refs/tags/4.0.0
+  #  - cd installer/
     #- sed -i "s/..\/:\/awx:Z/\/root\/src\/github.com\/sky-joker\/shippable-devel\/awx-arm64arch:\/awx:Z/g" roles/image_build/tasks/main.yml
-    - ansible-playbook build.yml -i inventory -vvv
-  on_failure:
-    - docker rm awx_sdist_builder
-    - docker run -v /root/src/github.com/sky-joker/shippable-devel/awx-arm64arch:/awx --name awx_sdist_builder awx_sdist_builder:4.0.0
-    - pwd
-    - ls
-    - ls ../
-    - ls ../dist
-    - docker ps -a
-    - docker images
-    - cat roles/image_build/tasks/main.yml
+  #  - ansible-playbook build.yml -i inventory -vvv
+  #on_failure:
+  #  - docker rm awx_sdist_builder
+  #  - docker run -v /root/src/github.com/sky-joker/shippable-devel/awx-arm64arch:/awx --name awx_sdist_builder awx_sdist_builder:4.0.0
+  #  - pwd
+  #  - ls
+  #  - ls ../
+  #  - ls ../dist
+  #  - docker ps -a
+  #  - docker images
+  #  - cat roles/image_build/tasks/main.yml
