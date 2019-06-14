@@ -6,7 +6,7 @@ runtime:
 
 build:
   ci:
-    - docker run --privileged -v /opt:/opt --namte test centos:7
+    - docker run --privileged -v /opt:/opt --name test centos:7
     - docker ps
     - docker ps
     - for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i ls ; done
