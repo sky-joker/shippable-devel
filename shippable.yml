@@ -5,11 +5,11 @@ language: python
 #  container: true
 
 build:
-  ci:
-    - docker run --privileged -v /opt:/opt --name test centos:7
-    - docker ps
-    - docker ps
-    - for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i ls ; done
+  #ci:
+    #- docker run --privileged -v /opt:/opt --name test centos:7
+    #- docker ps
+    #- docker ps
+    #- for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i ls ; done
     #- ls /home/shippable/cache
     #- docker pull centos:7
     #- docker run -d -it -v /home/shippable/cache:/opt --name test centos:7
@@ -28,12 +28,18 @@ build:
     #- for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker exec test ls' ; done
 #  pre_ci_boot:
 #    options: "-v /tmp:/tmp"
-  #ci:
+  ci:
     #- apt install -y docker gcc python-dev
     #- pip install ansible docker-compose sdist
-    #- apt install -y python-dev ansible gcc
-    #- pip install docker-compose
-    #- git clone https://github.com/sky-joker/awx-arm64arch.git
+
+    - apt install -y python-dev ansible gcc
+    - pip install docker-compose
+    - git clone https://github.com/sky-joker/awx-arm64arch.git
+    - cd awx-arm64arch
+    - git checkout -b 4.0.0 refs/tags/4.0.0
+    - cd installer/
+    - ansible-playbook build.yml -i inventory
+
     #- cp -r awx-arm64arch/ /home/shippable/cache
     #- cd /home/shippable/cache/awx-arm64arch/
     #- git checkout -b 4.0.0 refs/tags/4.0.0
