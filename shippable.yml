@@ -37,7 +37,7 @@ build:
     - apt install -y python-dev ansible gcc
     - pip install docker-compose
     - git clone https://github.com/sky-joker/awx-arm64arch.git
-    - cp -r awx-arm64arch
+    - cd awx-arm64arch
     - git checkout -b 4.0.0 refs/tags/4.0.0
     - cd installer/
     - ansible-playbook build.yml -i inventory
