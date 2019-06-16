@@ -29,17 +29,17 @@ build:
     #- for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker exec test ls' ; done
   pre_ci_boot:
     #options: "-v /opt:/root/src"
-    options: "-v /opt:/opt"
+    options: "-v /tmp:/tmp"
   ci:
     #- apt install -y docker gcc python-dev
     #- pip install ansible docker-compose sdist
 
-    - rm -rf /opt/*
+    - rm -rf /tmp/*
     #- for i in $( docker ps -a | grep awx | awk '{print $1 }' ) ; do docker rm $i ; done
     #- for i in $( docker images | grep -v -e aarch64_ -e centos | grep awx | awk '{print $1,$2}' | sed -e 's/ /:/g' ) ; do docker rmi $i ; done
     - apt install -y python-dev ansible gcc
     - pip install docker-compose
-    - cd /opt
+    - cd /tmp
     - git clone https://github.com/sky-joker/awx-arm64arch.git
     - cd awx-arm64arch
     - git checkout -b 4.0.0 refs/tags/4.0.0
@@ -62,4 +62,3 @@ build:
   #  - docker ps -a
   #  - docker images
   #  - cat roles/image_build/tasks/main.yml
-
