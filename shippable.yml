@@ -1,11 +1,11 @@
 language: python
 
-runtime:
-  nodePool: shippable_shared_aarch64
-  container: true
+#runtime:
+#  nodePool: shippable_shared_aarch64
+#  container: true
 
 build:
-  ci:
+  #ci:
     #- docker run --privileged -v /opt:/opt --name test centos:7
     #- docker ps
     #- docker ps
@@ -14,14 +14,14 @@ build:
     #- docker pull centos:7
     #- docker run -d -it -v /home/shippable/cache:/opt --name test centos:7
     ##- docker run --privileged -v /opt:/opt --name some-docker -d docker:dind
-    - docker run --privileged -v /opt:/opt --name awx-ci-dind -d skyjokerxx/awx-ci-dind:latest
-    - docker ps
-    - docker ps -a
+    ##- docker run --privileged -v /opt:/opt --name awx-ci-dind -d skyjokerxx/awx-ci-dind:latest
+    ##- docker ps
+    ##- docker ps -a
     ##- for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'apk add ansible git python-dev py-pip gcc glib musl-dev libffi-dev openssl-dev make' ; done
     ##- for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'pip install docker-compose' ; done
-    - for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'cd /opt && git clone https://github.com/sky-joker/awx-arm64arch.git' ; done
-    - for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'cd /opt/awx-arm64arch/ && git checkout -b 4.0.0 refs/tags/4.0.0' ; done
-    - for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'cd /opt/awx-arm64arch/installer && ansible-playbook build.yml -i inventory' ; done
+    ##- for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'cd /opt && git clone https://github.com/sky-joker/awx-arm64arch.git' ; done
+    ##- for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'cd /opt/awx-arm64arch/ && git checkout -b 4.0.0 refs/tags/4.0.0' ; done
+    ##- for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'cd /opt/awx-arm64arch/installer && ansible-playbook build.yml -i inventory' ; done
     #- for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker ps' ; done
     #- for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker run -d -it -v /opt:/opt --name test centos:7 ; echo $?' ; done
     #- for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker ps' ; done
@@ -30,21 +30,21 @@ build:
   #pre_ci_boot:
     #options: "-v /opt:/root/src"
     #options: "-v /opt:/opt"
-  #ci:
+  ci:
     #- apt install -y docker gcc python-dev
     #- pip install ansible docker-compose sdist
 
-    #- rm -rf /opt/*
+    - rm -rf /opt/*
     #- for i in $( docker ps -a | grep awx | awk '{print $1 }' ) ; do docker rm $i ; done
     #- for i in $( docker images | grep -v -e aarch64_ -e centos | grep awx | awk '{print $1,$2}' | sed -e 's/ /:/g' ) ; do docker rmi $i ; done
-    #- apt install -y python-dev ansible gcc
-    #- pip install docker-compose
-    #- cd /opt
-    #- git clone https://github.com/sky-joker/awx-arm64arch.git
-    #- cd awx-arm64arch
-    #- git checkout -b 4.0.0 refs/tags/4.0.0
-    #- cd installer/
-    #- ansible-playbook build.yml -i inventory
+    - apt install -y python-dev ansible gcc
+    - pip install docker-compose
+    - cd /opt
+    - git clone https://github.com/sky-joker/awx-arm64arch.git
+    - cd awx-arm64arch
+    - git checkout -b 4.0.0 refs/tags/4.0.0
+    - cd installer/
+    - ansible-playbook build.yml -i inventory
 
     #- cp -r awx-arm64arch/ /home/shippable/cache
     #- cd /home/shippable/cache/awx-arm64arch/
