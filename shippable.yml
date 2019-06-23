@@ -1,7 +1,7 @@
 language: python
 
-#runtime:
-#  nodePool: shippable_shared_aarch64
+runtime:
+  nodePool: shippable_shared_aarch64
 #  container: true
 
 build:
@@ -27,22 +27,22 @@ build:
     #- for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker ps' ; done
     #- for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker ps -a' ; done
     #- for i in $( docker ps -a --format '{{ .ID }}' ) ; do docker exec $i sh -c 'docker exec test ls' ; done
-  pre_ci_boot:
+  #pre_ci_boot:
     #options: "-v /opt:/root/src"
-    options: "-v /tmp:/tmp"
+    #options: "-v /tmp:/tmp"
   ci:
     #- apt install -y docker gcc python-dev
     #- pip install ansible docker-compose sdist
 
-    - rm -rf /tmp/awx-arm64arch
+    ##- rm -rf /tmp/awx-arm64arch
     #- for i in $( docker ps -a | grep awx | awk '{print $1 }' ) ; do docker rm $i ; done
     #- for i in $( docker images | grep -v -e aarch64_ -e centos | grep awx | awk '{print $1,$2}' | sed -e 's/ /:/g' ) ; do docker rmi $i ; done
     - apt install -y python-dev ansible gcc
     - pip install docker-compose
-    - cd /tmp
+    ##- cd /tmp
     - git clone https://github.com/sky-joker/awx-arm64arch.git
     - cd awx-arm64arch
-    - git checkout -b 4.0.0 refs/tags/4.0.0
+    - git checkout -b 5.0.0 refs/tags/5.0.0
     - cd installer/
     - ansible-playbook build.yml -i inventory
 
